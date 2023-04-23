@@ -40,6 +40,21 @@ export class PhotoService {
       value: JSON.stringify(this.photos),
     });
   }
+  public async gallery() {
+    // Take a photo
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos,
+      quality: 100
+    });
+    // Save the picture and add it to photo collection
+    const savedImageFile = await this.savePicture(capturedPhoto);
+    this.photos.unshift(savedImageFile);
+    Preferences.set({
+      key: this.PHOTO_STORAGE,
+      value: JSON.stringify(this.photos),
+    });
+  }
 
   // Save picture to file on device
   private async savePicture(photo: Photo) {
@@ -103,6 +118,7 @@ export class PhotoService {
   public async loadSaved() {
     // Retrieve cached photo array data
     const photoList = await Preferences.get({ key: this.PHOTO_STORAGE });
+    console.log(photoList)
     this.photos = JSON.parse(photoList.value!) || [];
 
     // Easiest way to detect when running on the web:
@@ -119,6 +135,7 @@ export class PhotoService {
         // Web platform only: Load the photo as base64 data
         photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
       }
+
     }
   }
 

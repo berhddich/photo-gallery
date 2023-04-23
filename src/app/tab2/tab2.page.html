@@ -8,6 +8,9 @@
     <ion-fab-button (click)="addPhotoToGallery()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
+    <ion-fab-button (click)="gallery()">
+      <ion-icon name="images-outline"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
   <ion-grid>
     <ion-row>
@@ -17,6 +20,9 @@
       >
         <ion-img [src]="photo.webviewPath"></ion-img>
       </ion-col>
+      <ion-fab-button (click)="ngOnInit()">
+        <ion-icon>save</ion-icon>
+      </ion-fab-button>
     </ion-row>
   </ion-grid>
 </ion-content>
