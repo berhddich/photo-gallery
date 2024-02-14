@@ -1,6 +1,5 @@
 # Photo Gallery App
 
-![App Preview](link-to-preview-image.png)
 
 ## Overview
 
